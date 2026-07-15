@@ -241,7 +241,6 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
     <div class="station-title"><span class="dot"></span>巅峰泰嗨 · 金币充能站</div>
     <div class="coinpanel">
       <div class="coinchip"><span class="ci">💰</span><div class="cv"><div class="lab">我的金币</div><b id="coinNow">0</b></div></div>
-      <div class="coinchip vip"><span class="ci">⚡</span><div class="cv"><div class="lab">已消耗</div><b id="coinSpent">0</b></div></div>
     </div>
   </div>
 
@@ -358,7 +357,6 @@ function switchDay(d){
 
 function refreshHud(){
   document.getElementById('coinNow').textContent=state.coins.toLocaleString();
-  document.getElementById('coinSpent').textContent=state.spent.toLocaleString();
   document.getElementById('bbCoins').textContent=state.coins.toLocaleString();
   document.getElementById('lotTimes').textContent=Math.floor(state.coins/1000);
 }
