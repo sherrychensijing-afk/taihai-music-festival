@@ -411,7 +411,7 @@ function renderRank(){
       </div>
       <div class="aactions">
         <button class="ashare" onclick="event.stopPropagation();shareArtist('${a.n}')">推荐歌曲</button>
-        <button onclick="event.stopPropagation();this.parentElement.parentElement.classList.toggle('exp')">${card.classList.contains(exp)?'收起':'详情'}</button>
+        <button onclick="event.stopPropagation();this.parentElement.parentElement.classList.toggle('exp')">详情</button>
       </div>
       <div class="adetail">${rewardHtml}</div>`;
     el.appendChild(card);
