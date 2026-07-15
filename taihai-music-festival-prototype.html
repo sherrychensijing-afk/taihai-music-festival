@@ -3,174 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>泰嗨巅峰音乐节 · 活动交互稿（原型 v2）</title>
+<title>泰嗨巅峰音乐节 · 活动交互稿（v3 吸底版）</title>
 <style>
-  :root{
-    --bg:#0c0a18; --bg2:#140d28; --card:#1b1336; --card2:#241846;
-    --pink:#ff2e88; --pink2:#ff7ab8; --cyan:#19e6ff; --purple:#a64bff;
-    --gold:#ffd24a; --gold2:#ffb300;
-    --txt:#f5f0ff; --mut:#9b8fc7; --line:rgba(255,255,255,.08); --ok:#3ad29f;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
-    background:radial-gradient(120% 80% at 50% -10%,#241046 0%,var(--bg) 55%);
-    color:var(--txt);min-height:100vh;display:flex;justify-content:center;padding:0 0 60px}
-  .phone{width:390px;max-width:100%;background:var(--bg);position:relative;overflow:hidden;
-    box-shadow:0 30px 80px rgba(166,75,255,.25),0 0 0 1px rgba(255,255,255,.06)}
+:root{
+  --bg:#0c0a18;--bg2:#140d28;--card:#1b1336;--card2:#241846;
+  --pink:#ff2e88;--pink2:#ff7ab8;--cyan:#19e6ff;--purple:#a64bff;
+  --gold:#ffd24a;--gold2:#ffb300;--ok:#3ad29f;
+  --txt:#f5f0ff;--mut:#9b8fc7;--line:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:radial-gradient(120% 80% at 50% -10%,#241046 0%,var(--bg) 55%);
+  color:var(--txt);min-height:100vh;display:flex;justify-content:center;padding-bottom:80px}
+.phone{width:390px;max-width:100%;background:var(--bg);position:relative;overflow:hidden;
+  box-shadow:0 30px 80px rgba(166,75,255,.25),0 0 0 1px rgba(255,255,255,.06)}
 
-  /* KV 主视觉 */
-  .kv{height:240px;position:relative;background:linear-gradient(135deg,#ff2e88 0%,#a64bff 45%,#19e6ff 100%);
-    display:flex;flex-direction:column;justify-content:flex-end;padding:20px;overflow:hidden}
-  .kv::after{content:"";position:absolute;inset:0;background:
-    radial-gradient(60% 50% at 80% 20%,rgba(255,255,255,.35),transparent 60%),
-    radial-gradient(50% 40% at 15% 90%,rgba(0,0,0,.3),transparent 60%)}
-  .kv .tag{position:relative;font-size:11px;letter-spacing:3px;opacity:.9}
-  .kv h1{position:relative;font-size:34px;font-weight:900;letter-spacing:1px;text-shadow:0 3px 20px rgba(0,0,0,.4);line-height:1.05}
-  .kv .sub{position:relative;margin-top:8px;font-size:13px;font-weight:600}
-  .kv .date{position:relative;margin-top:10px;display:inline-block;align-self:flex-start;
-    background:rgba(0,0,0,.35);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700}
+/* ========== KV ========== */
+.kv{height:220px;position:relative;background:linear-gradient(135deg,#ff2e88 0%,#a64bff 45%,#19e6ff 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:20px;overflow:hidden}
+.kv::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 80% 20%,rgba(255,255,255,.35),transparent 60%),
+  radial-gradient(50% 40% at 15% 90%,rgba(0,0,0,.3),transparent 60%)}
+.kv .tag{position:relative;font-size:11px;letter-spacing:3px;opacity:.9}
+.kv h1{position:relative;font-size:32px;font-weight:900;text-shadow:0 3px 20px rgba(0,0,0,.4);line-height:1.05}
+.kv .sub{position:relative;margin-top:6px;font-size:13px;font-weight:600}
+.kv .date{position:relative;margin-top:8px;display:inline-block;background:rgba(0,0,0,.35);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
 
-  /* 686x200 轮播 banner */
-  .banner{position:relative;aspect-ratio:686/200;overflow:hidden;background:#000}
-  .slides{display:flex;height:100%;transition:transform .5s ease}
-  .slide{min-width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 26px;position:relative}
-  .slide h3{font-size:22px;font-weight:900;text-shadow:0 2px 14px rgba(0,0,0,.5)}
-  .slide p{margin-top:6px;font-size:12px;color:#fff;opacity:.92}
-  .slide.s1{background:linear-gradient(120deg,#ff2e88,#a64bff)}
-  .slide.s2{background:linear-gradient(120deg,#19e6ff,#3a6bff)}
-  .slide.s3{background:linear-gradient(120deg,#ffb300,#ff2e88)}
-  .dots{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:6px}
-  .dots i{width:6px;height:6px;border-radius:6px;background:rgba(255,255,255,.45);transition:.3s}
-  .dots i.on{width:18px;background:#fff}
+/* ========== 轮播 686×200 ========== */
+.banner{position:relative;aspect-ratio:686/200;overflow:hidden;background:#000}
+.slides{display:flex;height:100%;transition:transform .5s ease}
+.slide{min-width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 26px;position:relative}
+.slide h3{font-size:22px;font-weight:900;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.slide p{margin-top:6px;font-size:12px;color:#fff;opacity:.92}
+.slide.s1{background:linear-gradient(120deg,#ff2e88,#a64bff)}
+.slide.s2{background:linear-gradient(120deg,#19e6ff,#3a6bff)}
+.slide.s3{background:linear-gradient(120deg,#ffb300,#ff2e88)}
+.dots{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.dots i{width:6px;height:6px;border-radius:6px;background:rgba(255,255,255,.45);transition:.3s}
+.dots i.on{width:18px;background:#fff}
 
-  /* 通用 section */
-  .sec{padding:18px 16px;border-bottom:8px solid #0a0814}
-  .sec h2{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:12px}
-  .sec h2 .bar{width:4px;height:16px;border-radius:3px;background:linear-gradient(var(--pink),var(--purple))}
-  .muted{color:var(--mut);font-size:12px;line-height:1.6}
-  .legend{font-size:10px;color:var(--mut);margin-top:8px;line-height:1.6}
+/* ========== 通用 section ========== */
+.sec{padding:16px;border-bottom:8px solid #0a0814}
+.sec h2{font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sec h2 .bar{width:4px;height:15px;border-radius:3px;background:linear-gradient(var(--pink),var(--purple))}
+.muted{color:var(--mut);font-size:12px;line-height:1.6}
 
-  /* 活动介绍 */
-  .video{aspect-ratio:16/9;border-radius:14px;background:linear-gradient(135deg,#2a1b50,#15233f);
-    display:flex;align-items:center;justify-content:center;border:1px solid var(--line);cursor:pointer}
-  .video .play{width:54px;height:54px;border-radius:50%;background:rgba(255,46,136,.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,46,136,.6)}
-  .video .play::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
-  .intro-img{display:flex;gap:8px;margin-top:10px}
-  .intro-img div{flex:1;height:70px;border-radius:10px;background:linear-gradient(135deg,#33205e,#1d2b4d);border:1px solid var(--line)}
+/* ========== 活动介绍 ========== */
+.video{aspect-ratio:16/9;border-radius:14px;background:linear-gradient(135deg,#2a1b50,#15233f);
+  display:flex;align-items:center;justify-content:center;border:1px solid var(--line);cursor:pointer}
+.video .play{width:52px;height:52px;border-radius:50%;background:rgba(255,46,136,.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,46,136,.6)}
+.video .play::after{content:"";border-left:15px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.intro-img{display:flex;gap:8px;margin-top:10px}
+.intro-img div{flex:1;height:64px;border-radius:10px;background:linear-gradient(135deg,#33205e,#1d2b4d);border:1px solid var(--line)}
 
-  /* 艺人阵容（顶部概览，点击进充能站） */
-  .daytabs{display:flex;gap:8px;margin-bottom:12px}
-  .daytabs button{flex:1;padding:9px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-weight:700;font-size:13px}
-  .daytabs button.on{background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;border-color:transparent}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  .artist{text-align:center;cursor:pointer}
-  .artist .av{width:100%;aspect-ratio:1;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff}
-  .artist .nm{font-size:11px;margin-top:5px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ========== 艺人阵容 ========== */
+.daytabs{display:flex;gap:8px;margin-bottom:10px}
+.daytabs button{flex:1;padding:8px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-weight:700;font-size:13px}
+.daytabs button.on{background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.artist{text-align:center;cursor:pointer}
+.artist .av{width:100%;aspect-ratio:1;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff}
+.artist .nm{font-size:11px;margin-top:5px;color:var(--txt)}
 
-  /* 售票 */
-  .tickets{display:flex;flex-direction:column;gap:10px}
-  .ticket{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
-  .ticket .ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
-  .ticket .tname{font-weight:800;font-size:14px}.ticket .tdesc{font-size:11px;color:var(--mut);margin-top:3px}
-  .ticket .price{margin-left:auto;text-align:right}.ticket .price b{color:var(--gold);font-size:17px}.ticket .price span{font-size:10px;color:var(--mut);display:block}
-  .ticket .buy{padding:8px 14px;border-radius:20px;background:linear-gradient(90deg,var(--cyan),var(--purple));color:#fff;font-weight:800;font-size:12px;margin-left:6px}
+/* ========== 售票 ========== */
+.tickets{display:flex;flex-direction:column;gap:8px}
+.ticket{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.ticket .ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px}
+.ticket .tname{font-weight:800;font-size:13px}.ticket .tdesc{font-size:10px;color:var(--mut);margin-top:2px}
+.ticket .price{margin-left:auto;text-align:right}.ticket .price b{color:var(--gold);font-size:16px}.ticket .price span{font-size:10px;color:var(--mut);display:block}
+.ticket .buy{padding:7px 12px;border-radius:18px;background:linear-gradient(90deg,var(--cyan),var(--purple));color:#fff;font-weight:800;font-size:12px;margin-left:6px}
 
-  /* ===================== 充能站 ===================== */
-  .station{padding:0 0 30px}
-  .station-h{background:linear-gradient(135deg,#241046,#160e2e);padding:16px;border-bottom:1px solid var(--line)}
-  .station-h .st{font-size:16px;font-weight:900;display:flex;align-items:center;gap:8px}
-  .station-h .st .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
-  .coinpanel{display:flex;align-items:center;gap:10px;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
-  .coinpanel .ci{flex:1}
-  .coinpanel .ci .lab{font-size:10px;color:var(--mut)}
-  .coinpanel .ci b{font-size:18px;color:var(--gold);font-variant-numeric:tabular-nums}
-  .coinpanel .ci.spent b{color:var(--cyan)}
-  .coinpanel .ctask{margin-left:auto;padding:10px 14px;border-radius:20px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:800;font-size:12px;white-space:nowrap}
+/* ========== 充能站头部：金币面板 ========== */
+.station-h{background:linear-gradient(135deg,#241046,#160e2e);padding:14px 16px;border-bottom:1px solid var(--line)}
+.station-title{font-size:15px;font-weight:900;display:flex;align-items:center;gap:8px}
+.station-title .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.coinpanel{display:flex;align-items:center;gap:8px;margin-top:10px}
+.coinchip{flex:1;display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.coinchip .ci{font-size:17px}.coinchip .cv{flex:1}
+.coinchip .cv .lab{font-size:10px;color:var(--mut)}.coinchip .cv b{font-size:15px;color:var(--gold);font-variant-numeric:tabular-nums}
+.coinchip.vip b{color:var(--pink)}
 
-  /* 艺人解锁进度（世界杯式） */
-  .block-h{font-size:13px;font-weight:800;padding:16px 16px 8px;display:flex;align-items:center;gap:8px}
-  .block-h .ic{font-size:16px}
-  .acard{margin:0 16px 12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer}
-  .acard.top .rank{color:var(--gold)}
-  .arow{display:flex;align-items:center;gap:10px}
-  .arow .rank{width:26px;text-align:center;font-weight:900;font-size:16px;color:var(--mut)}
-  .arow .aav{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:16px}
-  .arow .ainfo{flex:1;min-width:0}
-  .arow .an{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .arow .an .song{font-size:10px;color:var(--mut);font-weight:500}
-  .arow .aen{font-size:10px;color:var(--mut);margin-top:2px}
-  .arow .aen b{color:var(--gold);font-variant-numeric:tabular-nums}
-  .arow .abet{padding:7px 14px;border-radius:18px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:800;font-size:12px;white-space:nowrap}
-  .abar{position:relative;height:8px;border-radius:6px;background:#0e0a1f;margin:12px 4px 4px}
-  .abfill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .6s;width:0}
-  .anode{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:#2a2150;border:2px solid #3a2f66;transform:translate(-50%,-50%);transition:.3s}
-  .anode.on{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px var(--gold)}
-  .atiers{display:flex;justify-content:space-between;font-size:9px;color:var(--mut);margin:8px 2px 0}
-  .atiers .ult{color:var(--cyan)}
-  .aactions{display:flex;gap:8px;margin-top:10px}
-  .aactions .ashare{flex:1;padding:8px;border-radius:12px;background:var(--card2);border:1px solid var(--line);color:var(--cyan);font-weight:800;font-size:12px}
-  .adetail{max-height:0;overflow:hidden;transition:max-height .3s;margin-top:0}
-  .acard.exp .adetail{max-height:300px;margin-top:10px}
-  .rw{display:flex;gap:8px;padding:8px;border-radius:10px;background:var(--card2);border:1px solid var(--line);margin-bottom:6px;opacity:.55}
-  .rw.on{opacity:1;border-color:rgba(255,210,74,.4)}
-  .rw .rk{font-size:16px}.rw .rt{font-size:11px;font-weight:700}.rw .rd{font-size:9px;color:var(--mut);margin-top:2px}
-  .rw .tag{margin-left:auto;font-size:9px;padding:2px 7px;border-radius:9px;background:#2a2150;color:var(--mut);white-space:nowrap}
-  .rw.on .tag{background:var(--ok);color:#04231a}
+/* ========== 艺人排行榜（参考图式）========== */
+.rank-header{font-size:13px;font-weight:800;padding:12px 16px 6px;display:flex;align-items:center;gap:8px}
+.rank-header .ic{font-size:15px}
+.acard{margin:0 16px 10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;position:relative;overflow:hidden}
+.acard.top3{border-color:rgba(255,210,74,.25)}
+.acard.top1{border-color:rgba(255,210,74,.45);box-shadow:0 0 20px rgba(255,210,74,.08)}
+.arow{display:flex;align-items:center;gap:10px}
+.arow .rank{width:28px;text-align:center;font-weight:900;font-size:18px;color:var(--mut);flex-shrink:0}
+.arow .rank.g{color:var(--gold)}.arow .rank.s{color:silver}.arow .rank.b{color:#cd7f32}
+.arow .aav{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:17px;flex-shrink:0}
+.arow .ainfo{flex:1;min-width:0}
+.arow .an{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow .an .song{font-size:10px;color:var(--mut);font-weight:500}
+.arow .aen{font-size:10px;color:var(--mut);margin-top:2px}
+.arow .aen b{color:var(--gold);font-variant-numeric:tabular-nums}
+.arow .abet{padding:6px 12px;border-radius:16px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:800;font-size:12px;white-space:nowrap;flex-shrink:0}
+.abar{position:relative;height:8px;border-radius:6px;background:#0e0a1f;margin:12px 4px 4px}
+.abfill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .6s;width:0}
+.anode{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:#2a2150;border:2px solid #3a2f66;transform:translate(-50%,-50%);transition:.3s}
+.anode.on{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px var(--gold)}
+.atiers{display:flex;justify-content:space-between;font-size:9px;color:var(--mut);margin:6px 2px 0}
+.aactions{display:flex;gap:8px;margin-top:10px}
+.aactions button{flex:1;padding:8px;border-radius:12px;font-weight:800;font-size:12px;border:1px solid var(--line)}
+.aactions .ashare{background:var(--card2);color:var(--cyan)}
+.adetail{max-height:0;overflow:hidden;transition:max-height .3s;margin-top:0}
+.acard.exp .adetail{max-height:260px;margin-top:10px}
+.rw{display:flex;gap:8px;padding:8px;border-radius:10px;background:var(--card2);border:1px solid var(--line);margin-bottom:6px;opacity:.55}
+.rw.on{opacity:1;border-color:rgba(255,210,74,.4)}
+.rw .rk{font-size:15px}.rw .rt{font-size:11px;font-weight:700}.rw .rd{font-size:9px;color:var(--mut);margin-top:2px}
+.rw .tag{margin-left:auto;font-size:9px;padding:2px 7px;border-radius:9px;background:#2a2150;color:var(--mut);white-space:nowrap}
+.rw.on .tag{background:var(--ok);color:#04231a}
 
-  /* 任务入口条（流中） */
-  .taskbar{margin:4px 16px 12px;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;
-    background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--line);cursor:pointer}
-  .taskbar .ti{font-size:20px}
-  .taskbar .tt{flex:1}.taskbar .tt .t{font-weight:800;font-size:13px}.taskbar .tt .d{font-size:10px;color:var(--mut);margin-top:2px}
-  .taskbar .arr{color:var(--mut);font-size:18px}
+/* ========== ★★★ 吸底固定栏 ★★★ ========== */
+.bottombar{position:fixed;left:0;right:0;bottom:0;z-index:70;
+  background:linear-gradient(to top,rgba(12,10,24,.98) 75%,rgba(12,10,24,0));
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));
+  display:flex;align-items:center;gap:10px;max-width:390px;margin:0 auto}
+.bb-status{flex:1;min-width:0;display:flex;align-items:center;gap:6px}
+.bb-avatar{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.bb-info{min-width:0}.bb-info .name{font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bb-info .coins{font-size:10px;color:var(--gold);font-weight:600}
+.bb-btn{flex:1;padding:11px 0;border-radius:22px;font-weight:900;font-size:13px;text-align:center;border:none;cursor:pointer;white-space:nowrap;transition:.15s}
+.bb-btn:active{transform:scale(.96)}
+.bb-btn.primary{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;box-shadow:0 4px 16px rgba(255,46,136,.35)}
+.bb-btn.secondary{background:var(--card);color:var(--txt);border:1px solid var(--line)}
 
-  /* 抽奖 */
-  .lottery{margin:0 16px;background:linear-gradient(160deg,var(--card2),var(--card));border-radius:18px;padding:18px;border:1px solid var(--line);text-align:center}
-  .lottery .lt{font-weight:800;font-size:15px}
-  .grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
-  .cell{aspect-ratio:1;border-radius:14px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--mut);padding:4px;text-align:center}
-  .cell .ci{font-size:22px;margin-bottom:3px}
-  .cell.mid{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-weight:900;font-size:14px;cursor:pointer}
-  .cell.active{outline:2px solid var(--gold);outline-offset:-2px;box-shadow:0 0 16px rgba(255,210,74,.6)}
-  .lottery .tip{font-size:11px;color:var(--mut);margin-top:6px}.lottery .tip b{color:var(--gold)}
+/* ========== 浮层 ========== */
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;opacity:0;pointer-events:none;transition:.25s}
+.mask.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:81;background:var(--bg2);
+  border-radius:22px 22px 0 0;padding:20px 16px 34px;
+  transform:translateY(100%);transition:.3s ease-out;border:1px solid var(--line);max-width:390px;margin:0 auto}
+.sheet.on{transform:none}
+.sheet h3{font-size:16px;font-weight:900;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.sheet .close{font-size:24px;color:var(--mut);line-height:1;cursor:pointer;padding:4px}
 
-  /* 浮层 */
-  .mask{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;opacity:0;pointer-events:none;transition:.25s}
-  .mask.on{opacity:1;pointer-events:auto}
-  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:81;background:var(--bg2);border-radius:22px 22px 0 0;
-    padding:18px 16px 28px;transform:translateY(100%);transition:.3s;border:1px solid var(--line);max-width:390px;margin:0 auto}
-  .sheet.on{transform:none}
-  .sheet h3{font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-  .sheet .close{font-size:22px;color:var(--mut);line-height:1}
-  .sheet .betinfo{font-size:12px;color:var(--mut);margin-bottom:12px}.sheet .betinfo b{color:var(--gold)}
-  .betgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .betgrid button{padding:12px 4px;border-radius:12px;background:var(--card2);border:1px solid var(--line);color:var(--txt);font-weight:800;font-size:12px}
-  .betgrid button.demo{background:none;border:1px dashed var(--line);color:var(--mut);font-size:11px}
-  .betcustom{display:flex;gap:8px;margin-top:10px}
-  .betcustom input{flex:1;min-width:0;padding:11px;border-radius:12px;background:#0e0a1f;border:1px solid var(--line);color:var(--txt);text-align:center;font-size:13px}
-  .betcustom button{padding:11px 18px;border-radius:12px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:800;border:none;font-size:13px}
-  .betnodes{margin-top:12px;font-size:10px;color:var(--mut);line-height:1.6}
+/* 任务浮层 */
+.task{display:flex;align-items:center;gap:10px;padding:12px;background:var(--card);border-radius:14px;margin-bottom:10px;border:1px solid var(--line)}
+.task .ico{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.task .info{flex:1;min-width:0}.task .info .t{font-weight:700;font-size:13px}.task .info .d{font-size:11px;color:var(--mut);margin-top:3px}
+.stars{color:var(--gold);letter-spacing:1px;font-size:11px}
+.task .act{padding:7px 12px;border-radius:18px;background:var(--card2);color:var(--cyan);font-weight:800;font-size:12px;border:1px solid var(--line);cursor:pointer;white-space:nowrap;flex-shrink:0}
+.task .act.done{color:var(--ok);border-color:rgba(58,210,159,.4)}
+.task .cnt{font-size:10px;color:var(--mut);text-align:right;margin-top:4px}
+.vip-tip{margin-top:14px;padding:10px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(255,210,74,.08),rgba(255,46,136,.08));border:1px dashed rgba(255,210,74,.25);font-size:12px;color:var(--gold);text-align:center;font-weight:700}
 
-  /* 任务列表（浮层内） */
-  .task{display:flex;align-items:center;gap:10px;padding:12px;background:var(--card);border-radius:14px;margin-bottom:10px;border:1px solid var(--line)}
-  .task .ico{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-size:20px}
-  .task .info{flex:1}.task .info .t{font-weight:700;font-size:13px}.task .info .d{font-size:11px;color:var(--mut);margin-top:3px}
-  .stars{color:var(--gold);letter-spacing:1px;font-size:11px}
-  .task .act{padding:7px 12px;border-radius:18px;background:var(--card2);color:var(--cyan);font-weight:800;font-size:12px;border:1px solid var(--line)}
-  .task .act.done{color:var(--ok);border-color:rgba(58,210,159,.4)}
-  .task .cnt{font-size:10px;color:var(--mut)}
+/* 抽奖浮层 */
+.lottery{text-align:center}
+.lottery .lt{font-weight:800;font-size:15px;margin-bottom:4px}
+.lottery .subt{font-size:11px;color:var(--mut);margin-bottom:14px}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 auto 12px}
+.cell{aspect-ratio:1;border-radius:14px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--mut);padding:4px}
+.cell .ci{font-size:22px;margin-bottom:3px}
+.cell.mid{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-weight:900;font-size:14px;cursor:pointer}
+.cell.active{outline:2px solid var(--gold);outline-offset:-2px;box-shadow:0 0 16px rgba(255,210,74,.6)}
+.lottery .tip{font-size:11px;color:var(--mut)}.lottery .tip b{color:var(--gold)}
+.drawbtn{width:100%;padding:14px;border-radius:22px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:900;font-size:15px;border:none;cursor:pointer;margin-top:6px}
 
-  .toast{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%) scale(.9);z-index:99;
-    background:rgba(20,13,40,.96);border:1px solid var(--gold);color:var(--gold);padding:14px 22px;border-radius:16px;
-    font-weight:800;font-size:14px;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 10px 40px rgba(0,0,0,.5);text-align:center}
-  .toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
-  .foot{text-align:center;font-size:10px;color:var(--mut);padding:20px 16px}
+/* 充能浮层 */
+.betinfo{font-size:12px;color:var(--mut);margin-bottom:12px;text-align:center}.betinfo b{color:var(--gold)}
+.betgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.betgrid button{padding:12px 4px;border-radius:12px;background:var(--card2);border:1px solid var(--line);color:var(--txt);font-weight:800;font-size:12px}
+.betgrid button.demo{background:none;border:1px dashed var(--line);color:var(--mut);font-size:11px}
+.betcustom{display:flex;gap:8px;margin-top:10px}
+.betcustom input{flex:1;min-width:0;padding:11px;border-radius:12px;background:#0e0a1f;border:1px solid var(--line);color:var(--txt);text-align:center;font-size:13px}
+.betcustom button{padding:11px 18px;border-radius:12px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:800;font-size:13px;border:none}
+.betnodes{margin-top:12px;font-size:10px;color:var(--mut);line-height:1.6}
+
+/* Toast */
+.toast{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%) scale(.9);z-index:99;
+  background:rgba(20,13,40,.96);border:1px solid var(--gold);color:var(--gold);padding:14px 22px;border-radius:16px;
+  font-weight:800;font-size:14px;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 10px 40px rgba(0,0,0,.5);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+.foot{text-align:center;font-size:10px;color:var(--mut);padding:20px 16px}
 </style>
 </head>
 <body>
 <div class="phone">
 
-  <!-- KV 主视觉 -->
+  <!-- KV -->
   <div class="kv">
     <div class="tag">THAI · HYPE MUSIC FESTIVAL</div>
     <h1>泰嗨巅峰<br>音乐节</h1>
@@ -178,7 +191,7 @@
     <div class="date">📅 9.5 - 9.6 · 两天十六组艺人</div>
   </div>
 
-  <!-- 686x200 轮播 banner -->
+  <!-- 686x200 轮播 -->
   <div class="banner">
     <div class="slides" id="slides">
       <div class="slide s1"><h3>金币充能站</h3><p>做任务赚金币 · 为爱豆充能解锁专属惊喜</p></div>
@@ -191,12 +204,12 @@
   <!-- 活动介绍 -->
   <div class="sec">
     <h2><span class="bar"></span>活动介绍</h2>
-    <div class="video" onclick="toast('🎬 官宣视频播放（占位）')"><div class="play"></div></div>
+    <div class="video" onclick="toast('🎬 官宣视频播放')"><div class="play"></div></div>
     <div class="intro-img"><div></div><div></div><div></div></div>
-    <p class="muted" style="margin-top:10px">泰嗨巅峰音乐节是由 XXX 联合呈现的线下音乐盛典。本页面为官方宣发与粉丝互动主阵地，集阵容展示、购票、金币充能打投于一体。</p>
+    <p class="muted" style="margin-top:10px">泰嗨巅峰音乐节是由 XXX 联合呈现的线下音乐盛典。本页面为官方宣发与粉丝互动主阵地。</p>
   </div>
 
-  <!-- 艺人阵容概览 -->
+  <!-- 艺人阵容 -->
   <div class="sec">
     <h2><span class="bar"></span>艺人阵容</h2>
     <div class="daytabs">
@@ -204,7 +217,7 @@
       <button data-day="2" onclick="switchDay(2)">DAY 2 · 9.6</button>
     </div>
     <div class="grid" id="artistGrid"></div>
-    <p class="legend">点击头像可在下方「充能站」快速定位该艺人。</p>
+    <p class="muted" style="margin-top:8px;font-size:11px">点击头像可在下方「充能站」快速定位该艺人。</p>
   </div>
 
   <!-- 售票 -->
@@ -213,50 +226,46 @@
     <div class="tickets">
       <div class="ticket"><div class="ico" style="background:linear-gradient(135deg,#3a6bff,#19e6ff)">🎫</div>
         <div><div class="tname">单日票</div><div class="tdesc">任选一天入场 · 区域随机</div></div>
-        <div class="price"><b>¥399</b><span>起</span></div><div class="buy" onclick="toast('跳转购票（占位）')">购买</div></div>
+        <div class="price"><b>¥399</b><span>起</span></div><div class="buy" onclick="toast('跳转购票')">购买</div></div>
       <div class="ticket"><div class="ico" style="background:linear-gradient(135deg,var(--pink),var(--purple))">🎟️</div>
         <div><div class="tname">双日通票</div><div class="tdesc">两天全场次通行 · 推荐</div></div>
-        <div class="price"><b>¥699</b><span>起</span></div><div class="buy" onclick="toast('跳转购票（占位）')">购买</div></div>
+        <div class="price"><b>¥699</b><span>起</span></div><div class="buy" onclick="toast('跳转购票')">购买</div></div>
       <div class="ticket"><div class="ico" style="background:linear-gradient(135deg,var(--gold),var(--gold2))">👑</div>
         <div><div class="tname">VIP巅峰票</div><div class="tdesc">前区站位 + 专属礼包</div></div>
-        <div class="price"><b>¥1299</b><span>起</span></div><div class="buy" onclick="toast('跳转购票（占位）')">购买</div></div>
+        <div class="price"><b>¥1299</b><span>起</span></div><div class="buy" onclick="toast('跳转购票')">购买</div></div>
     </div>
   </div>
 
   <!-- ============ 充能站 ============ -->
-  <div class="station">
-    <div class="station-h">
-      <div class="st"><span class="dot"></span>巅峰泰嗨 · 金币充能站</div>
-      <div class="coinpanel">
-        <div class="ci">💰 我的金币<br><b id="coinNow">0</b></div>
-        <div class="ci spent">已消耗<br><b id="coinSpent">0</b></div>
-        <button class="ctask" onclick="openSheet('taskSheet')">做任务赚金币 ›</button>
-      </div>
-    </div>
-
-    <!-- ① 艺人解锁进度（世界杯式） -->
-    <div class="block-h"><span class="ic">🔥</span>艺人解锁进度 · 终极混战总榜</div>
-    <div id="artistList"></div>
-
-    <!-- ② 任务（入口条，点开浮层） -->
-    <div class="taskbar" onclick="openSheet('taskSheet')">
-      <div class="ti">📋</div>
-      <div class="tt"><div class="t">做任务赚金币</div><div class="d">听歌 / 看广告 / 邀请好友 / 分享 …</div></div>
-      <div class="arr">›</div>
-    </div>
-
-    <!-- ③ 抽奖 -->
-    <div class="block-h"><span class="ic">🎰</span>九宫格抽奖</div>
-    <div class="lottery">
-      <div class="lt">抽周边 · 抽门票 · 抽签名照</div>
-      <div class="grid9" id="grid9"></div>
-      <div class="tip">每次消耗 <b>1000</b> 金币 · 当前可抽 <b id="lotTimes">0</b> 次</div>
-      <button class="buy" style="margin-top:10px;padding:12px 30px" onclick="draw()">立即抽奖</button>
+  <div class="station-h" id="stationHead">
+    <div class="station-title"><span class="dot"></span>巅峰泰嗨 · 金币充能站</div>
+    <div class="coinpanel">
+      <div class="coinchip"><span class="ci">💰</span><div class="cv"><div class="lab">我的金币</div><b id="coinNow">0</b></div></div>
+      <div class="coinchip vip"><span class="ci">⚡</span><div class="cv"><div class="lab">已消耗</div><b id="coinSpent">0</b></div></div>
     </div>
   </div>
 
-  <div class="foot">泰嗨巅峰音乐节 · 活动交互稿 v2（高保真原型）<br>数值均为占位示例，需产品侧核定</div>
+  <!-- 艺人排行榜（核心内容） -->
+  <div class="rank-header"><span class="ic">🏆</span>艺人解锁进度 · 终极混战总榜</div>
+  <div id="artistList"></div>
+
+  <div class="foot">泰嗨巅峰音乐节 · 活动交互稿 v3<br>数值均为占位示例，需产品侧核定</div>
 </div>
+
+
+<!-- ==================== 吸底栏 ==================== -->
+<div class="bottombar">
+  <div class="bb-status">
+    <div class="bb-avatar">😎</div>
+    <div class="bb-info">
+      <div class="name" id="bbName">linlin</div>
+      <div class="coins">💰 已推荐 <b id="bbCoins">0</b> 金币</div>
+    </div>
+  </div>
+  <button class="bb-btn primary" onclick="openSheet('taskSheet')">做任务赚金币</button>
+  <button class="bb-btn secondary" onclick="openSheet('lotterySheet')">幸运抽奖 🎰</button>
+</div>
+
 
 <!-- 浮层：充能 -->
 <div class="mask" id="mask" onclick="closeSheet()"></div>
@@ -276,141 +285,249 @@
 <!-- 浮层：任务 -->
 <div class="sheet" id="taskSheet">
   <h3>做任务赚金币<span class="close" onclick="closeSheet()">×</span></h3>
-  <div class="task"><div class="ico">🎧</div><div class="info"><div class="t">听歌（每首）</div><div class="d"><span class="stars">★</span> 单次 10 枚 · 每日上限 <b>20</b> 首</div></div><div style="text-align:right"><div class="act" onclick="doTask(this,'listen',10)">去完成</div><div class="cnt">0/20</div></div></div>
-  <div class="task"><div class="ico">📺</div><div class="info"><div class="t">观看广告</div><div class="d"><span class="stars">★★</span> 单次 20 枚 · 每日上限 <b>5</b> 次</div></div><div style="text-align:right"><div class="act" onclick="doTask(this,'ad',20)">去完成</div><div class="cnt">0/5</div></div></div>
-  <div class="task"><div class="ico">👥</div><div class="info"><div class="t">邀请好友参与</div><div class="d"><span class="stars">★★★</span> 单次 100 枚 · 每日上限 <b>5</b> 次</div></div><div style="text-align:right"><div class="act" onclick="doTask(this,'invite',100)">去完成</div><div class="cnt">0/5</div></div></div>
-  <div class="task"><div class="ico">🏷️</div><div class="info"><div class="t">访问品牌方页面</div><div class="d"><span class="stars">★★★</span> 单次 100 枚 · 每日上限 <b>3</b> 次</div></div><div style="text-align:right"><div class="act" onclick="doTask(this,'brand',100)">去完成</div><div class="cnt">0/3</div></div></div>
-  <div class="task"><div class="ico">📨</div><div class="info"><div class="t">分享歌曲给好友</div><div class="d"><span class="stars">★★★</span> 单次 50 枚 · 每日上限 <b>5</b> 次</div></div><div style="text-align:right"><div class="act" onclick="doTask(this,'share1',50)">去完成</div><div class="cnt">0/5</div></div></div>
-  <div class="task"><div class="ico">🌈</div><div class="info"><div class="t">分享至朋友圈</div><div class="d"><span class="stars">★★★★</span> 单次 100 枚 · 每日上限 <b>3</b> 次</div></div><div style="text-align:right"><div class="act" onclick="doTask(this,'share2',100)">去完成</div><div class="cnt">0/3</div></div></div>
-  <div class="task"><div class="ico">💎</div><div class="info"><div class="t">开通会员（引导）</div><div class="d">超会用户金币获取 <b style="color:var(--gold)">×1.5</b> 系数加成</div></div><div style="text-align:right"><div class="act" onclick="toggleVip(this)">去开通</div></div></div>
-  <p class="legend">任务每日上限 / 单次金币数值为占位示例，需产品侧核定。</p>
+  <div id="taskList"></div>
+  <div class="vip-tip">✨ 开通超级会员，所有金币获取 × 1.5 加成！</div>
 </div>
 
+<!-- 浮层：抽奖 -->
+<div class="sheet" id="lotterySheet">
+  <h3>幸运抽奖<span class="close" onclick="closeSheet()">×</span></h3>
+  <div class="lottery">
+    <div class="lt">抽周边 · 抽门票 · 抽签名照</div>
+    <div class="subt">每次消耗 1000 金币 · 当前可抽 <b id="lotTimes">0</b> 次</div>
+    <div class="grid9" id="grid9"></div>
+    <div class="tip">奖品池：签名照 / 门票 / 周边 / VIP券 / 玩偶 …</div>
+    <button class="drawbtn" onclick="draw()">立即抽奖</button>
+  </div>
+</div>
+
+<!-- toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-/* ---------- 数据 ---------- */
-const ART = [
-  {d:1,n:"林夕然",s:"夏日回响"},{d:1,n:"苏屿",s:"潮汐"},{d:1,n:"陈星野",s:"星轨"},{d:1,n:"白桜",s:"樱落"},
-  {d:1,n:"顾辞",s:"辞"},{d:1,n:"江月",s:"江月"},{d:1,n:"沈逸",s:"逸"},{d:1,n:"夏未央",s:"未央"},
-  {d:2,n:"温黎",s:"黎明"},{d:2,n:"陆深",s:"深蓝"},{d:2,n:"韩星河",s:"星河"},{d:2,n:"叶澜",s:"澜"},
-  {d:2,n:"傅斯年",s:"斯年"},{d:2,n:"乔安",s:"安"},{d:2,n:"程野",s:"野"},{d:2,n:"闻笙",s:"笙"}
+// ==================== 数据 ====================
+const ARTISTS=[
+  {n:'林俊杰',s:'不为谁而作的歌',av:'#4CAF50',eng:18395747},
+  {n:'蔡徐坤',s:'What a Day',av:'#E91E63',eng:15241361},
+  {n:'邓紫棋',s:'GLORIA',av:'#FF5722',eng:12800000},
+  {n:'华晨宇',s:'好想爱这个世界啊',av:'#9C27B0',eng:10500000},
+  {n:'毛不易',s:'像我这样的人',av:'#607D8B',eng:8900000},
+  {n:'周深',s:'大鱼',av:'#00BCD4',eng:7200000},
+  {n:'薛之谦',s:'演员',av:'#795548',eng:6500000},
+  {n:'刘宇宁',s:'像风一样自由',av:'#F44336',eng:5800000},
+  {n:'赵露',s:'夏天的风',av:'#CDDC39',eng:4800000},
+  {n:'张杰',s:'这，就是爱',av:'#03A9F4',eng:4200000},
+  {n:'G.E.M.',s:'倒数',av:'#E91E63',eng:3600000},
+  {n:'王源',s:'客厅狂欢',av:'#8BC34A',eng:3100000},
+  {n:'欧阳娜娜',s:'The Star',av:'#AB47BC',eng:2700000},
+  {n:'王嘉尔',s:'Drive You Home',av:'#26C6DA',eng:2300000},
+  {n:'乃万',s:'风的颜色',av:'#FFA726',eng:1900000},
+  {n:'颜人中',s:'晚安',av:'#EF5350',eng:1500000},
 ];
-const COLORS=["#ff2e88","#19e6ff","#a64bff","#ffb300","#3ad29f","#ff7ab8","#5b8cff","#ff5e5e"];
-const NODES=[1000000,5000000,10000000]; // 节点阈值（节点4为排名）
-let artists = ART.map((a,i)=>({id:i,name:a.n,song:a.s,day:a.d,color:COLORS[i%COLORS.length],
-  energy:Math.floor(Math.random()*3000000), expanded:false}));
 
-const state={coins:0,spent:0,vip:false,caps:{listen:20,ad:5,invite:5,brand:3,share1:5,share2:3},cnt:{}};
-let betId=null;
+const TASKS=[
+  {i:'🎧',t:'听歌（每首）',d:'单次 10 枚 · 每日上限 20 首',star:'★',coin:10,max:20},
+  {i:'📺',t:'看广告视频',d:'单次 50 枚 · 每日上限 5 次',star:'★☆',coin:50,max:5},
+  {i:'📱',t:'邀请好友',d:'每成功邀请 1 人得 200 枚',star:'★★★',coin:200,max:10},
+  {i:'🤝',t:'品牌方联动',d:'完成品牌任务获 300 枚',star:'★★',coin:300,max:3},
+  {i:'🎵',t:'分享歌曲',d:'分享至好友/群聊得 20 枚/次',star:'★',coin:20,max:10},
+  {i:'⭕',t:'分享朋友圈',d:'分享活动海报得 100 枚/次',star:'★★',coin:100,max:3},
+];
 
-/* ---------- 通用 ---------- */
-function fmt(n){return n>=10000?(n/10000).toFixed(n%10000?1:0)+'万':n.toLocaleString();}
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1600);}
+const PRIZES=[{i:'📸',t:'签名照'},{i:'🎫',t:'门票'},{i:'🧢',t:'周边帽'},{i:'💿',t:'专辑'},{i:'✨',t:'谢谢参与'},{i:'🎀',t:'应援扇'},{i:'🔑',t:'VIP券'},{i:'🍫',t:'零食包'},{i:'🧸',t:'玩偶'}];
 
-/* ---------- 艺人阵容概览 ---------- */
-function renderGrid(day){const g=document.getElementById('artistGrid');g.innerHTML='';
-  artists.filter(a=>a.day===day).forEach(a=>{const d=document.createElement('div');d.className='artist';
-    d.innerHTML=`<div class="av" style="background:linear-gradient(135deg,${a.color},#241846)">${a.name[0]}</div><div class="nm">${a.name}</div>`;
-    d.onclick=()=>{document.querySelector('.station').scrollIntoView({behavior:'smooth'});setTimeout(()=>openBet(a.id),400);};
-    g.appendChild(d);});}
-function switchDay(d){document.querySelectorAll('.daytabs button').forEach(b=>b.classList.toggle('on',+b.dataset.day===d));renderGrid(d);}
+const NODES=[100,500,1000]; // 万
 
-/* ---------- 充能站：艺人解锁进度（世界杯式） ---------- */
-function renderArtistList(){
-  const list=[...artists].sort((a,b)=>b.energy-a.energy);
-  const maxE=list[0].energy||1;
-  const el=document.getElementById('artistList');el.innerHTML='';
-  list.forEach((a,i)=>{
-    const rank=i+1; const pct=Math.min(100,a.energy/NODES[2]*100);
-    const card=document.createElement('div');
-    card.className='acard'+(rank<=3?' top':'');
-    card.dataset.id=a.id;
-    const nodeHtml=NODES.map((th,k)=>`<div class="anode ${a.energy>=th?'on':''}" style="left:${NODES[k]/NODES[2]*100}%"></div>`).join('');
-    const rwHtml=[['📞','节点一 · 语音电话（站内信）','艺人向投票粉丝发 1 条虚拟语音条，自动下发私信',1],
-      ['🎁','节点二 · 应援大礼包','10 面道旗 · 5 块商场大屏 · 3 张拍立得花絮',2],
-      ['🎉','节点三 · 现场专属惊喜环节','该艺人专属彩蛋，统一在舞台上完成',3],
-      ['🏆','节点四 · 终极混战','总排名前三 → 专属应援展位 + 粉丝入场通道',4]]
-      .map(([rk,rt,rd,n])=>{const on=(n<=3&&a.energy>=NODES[n-1]);return `<div class="rw ${on?'on':''}"><div class="rk">${rk}</div><div><div class="rt">${rt}</div><div class="rd">${rd}</div></div><div class="tag">${on?'已解锁':'未解锁'}</div></div>`;}).join('');
+let state={coins:0,spent:0,tasks:{}};
+TASKS.forEach((_,i)=>state.tasks[i]=0);
+
+// ==================== 渲染 ====================
+function renderArtists(){
+  const g=document.getElementById('artistGrid');
+  g.innerHTML=''; const day=document.querySelector('.daytabs .on')?.dataset.day==='1'?1:2;
+  ARTISTS.slice((day-1)*8,day*8).forEach(a=>{
+    const d=document.createElement('div'); d.className='artist';
+    d.innerHTML=`<div class="av" style="background:${a.av}">${a.n[0]}</div><div class="nm">${a.n}</div>`;
+    g.appendChild(d);
+  });
+}
+function switchDay(d){
+  document.querySelectorAll('.daytabs button').forEach(b=>b.classList.toggle('on',b.dataset.day==d));
+  renderArtists();
+}
+
+function refreshHud(){
+  document.getElementById('coinNow').textContent=state.coins.toLocaleString();
+  document.getElementById('coinSpent').textContent=state.spent.toLocaleString();
+  document.getElementById('bbCoins').textContent=state.coins.toLocaleString();
+  document.getElementById('lotTimes').textContent=Math.floor(state.coins/1000);
+}
+
+function renderRank(){
+  const sorted=[...ARTISTS].sort((a,b)=>b.eng-a.eng);
+  const el=document.getElementById('artistList'); el.innerHTML='';
+  sorted.forEach((a,i)=>{
+    const rank=i+1;
+    const pct=Math.min(100,(a.eng/1e7)*100); // 以 1000万为满
+    const cls=rank<=3?'top'+rank:(rank<=5?'top3':'');
+    const rCls=rank===1?'g':rank===2?'s':rank===3?'b':'';
+    const nodes=NODES.map(n=>({v:n*1e4,lab:n+'万'}));
+
+    const card=document.createElement('div'); card.className=`acard ${cls}`;
+    card.onclick=function(){ this.classList.toggle('exp') };
+
+    let nodeHtml='';
+    nodes.forEach((nd,idx)=>{
+      const ndPct=(nd.v/1e7)*100;
+      const reached=a.eng>=nd.v;
+      nodeHtml+=`<div class="anode${reached?' on':''}" style="left:${ndPct}%"></div>`;
+    });
+
+    // 节点奖励详情
+    const rewards=[
+      {rk:'🥇',rt:'节点一：语音电话',rd:a.eng>=nodes[0].v?'已解锁':'未解锁',on:a.eng>=nodes[0].v,tag:'语音电话'},
+      {rk:'🥈',rt:'节点二：应援大礼包',rd:a.eng>=nodes[1].v?'已解锁':'未解锁',on:a.eng>=nodes[1].v,tag:'应援礼包'},
+      {rk:'🥉',rt:'节点三：现场彩蛋',rd:a.eng>=nodes[2].v?'已解锁':'未解锁',on:a.eng>=nodes[2].v,tag:'现场彩蛋'},
+      {rk:'🏆',rt:'终极混战',rd:`当前第 ${rank} 名`,on:true,tag:rank<=3?'专属展位':'参与'},
+    ];
+    let rewardHtml=rewards.map(r=>`
+      <div class="rw${r.on?' on':''}">
+        <div class="rk">${r.rk}</div><div><div class="rt">${r.rt}</div><div class="rd">${r.rd}</div></div><div class="tag">${r.tag}</div>
+      </div>`).join('');
+
     card.innerHTML=`
       <div class="arow">
-        <div class="rank">${rank<=3?'🥇🥈🥉'[rank-1]:'#'+rank}</div>
-        <div class="aav" style="background:linear-gradient(135deg,${a.color},#241846)">${a.name[0]}</div>
-        <div class="ainfo"><div class="an">${a.name} <span class="song">《${a.song}》</span></div>
-          <div class="aen">DAY${a.day} · 累计能量 <b>${a.energy.toLocaleString()}</b></div></div>
-        <button class="abet" onclick="event.stopPropagation();openBet(${a.id})">充能</button>
+        <div class="rank ${rCls}">${rank}</div>
+        <div class="aav" style="background:${a.av}">${a.n[0]}</div>
+        <div class="ainfo">
+          <div class="an">${a.n}<span class="song">《${a.s}》</span></div>
+          <div class="aen">累计 <b>${a.eng.toLocaleString()}</b></div>
+        </div>
+        <div class="abet" onclick="event.stopPropagation();openBet(${ARTISTS.indexOf(a)})">充能</div>
       </div>
       <div class="abar"><div class="abfill" style="width:${pct}%"></div>${nodeHtml}</div>
-      <div class="atiers"><span>100万</span><span>500万</span><span>1000万</span><span class="ult">🏆终极混战 第${rank}名</span></div>
-      <div class="aactions"><button class="ashare" onclick="event.stopPropagation();shareArtist(${a.id})">推荐歌曲分享</button></div>
-      <div class="adetail">${rwHtml}</div>`;
-    card.onclick=()=>{a.expanded=!a.expanded;card.classList.toggle('exp',a.expanded);};
+      <div class="atiers">
+        <span>${nodes[0].lab}</span><span>${nodes[1].lab}</span><span>${nodes[2].lab}</span><span style="color:var(--cyan)">终极混战</span>
+      </div>
+      <div class="aactions">
+        <button class="ashare" onclick="event.stopPropagation();shareArtist('${a.n}')">推荐歌曲</button>
+        <button onclick="event.stopPropagation();this.parentElement.parentElement.classList.toggle('exp')">${card.classList.contains(exp)?'收起':'详情'}</button>
+      </div>
+      <div class="adetail">${rewardHtml}</div>`;
     el.appendChild(card);
   });
 }
-function shareArtist(id){const a=artists.find(x=>x.id===id);toast('已生成《'+a.song+'》分享卡片（占位）');}
 
-/* ---------- 金币 ---------- */
-function refresh(){document.getElementById('coinNow').textContent=fmt(state.coins);
-  document.getElementById('coinSpent').textContent=fmt(state.spent);
-  document.getElementById('lotTimes').textContent=Math.floor(state.coins/1000);}
-function addCoins(n){const g=Math.round(n*(state.vip?1.5:1));state.coins+=g;refresh();return g;}
-
-/* ---------- 任务 ---------- */
-function doTask(el,key,base){
-  if((state.cnt[key]||0)>=state.caps[key]){toast('今日已达上限');return;}
-  state.cnt[key]=(state.cnt[key]||0)+1;
-  const g=addCoins(base);
-  const c=el.parentElement.querySelector('.cnt');if(c)c.textContent=state.cnt[key]+'/'+state.caps[key];
-  if(state.cnt[key]>=state.caps[key]){el.classList.add('done');el.textContent='已完成';}
-  toast('+'+g+' 金币'+(state.vip?'（超会×1.5）':''));
+function renderTasks(){
+  const el=document.getElementById('taskList'); el.innerHTML='';
+  TASKS.forEach((t,i)=>{
+    const done=state.tasks[i]>=t.max;
+    const d=document.createElement('div'); d.className='task';
+    d.innerHTML=`
+      <div class="ico">${t.i}</div>
+      <div class="info"><div class="t">${t.t}</div><div class="d"><span class="stars">${t.star}</span> 单次 ${t.coin} 枚 · 每日上限 <b>${t.max}</b></div></div>
+      <div style="text-align:right;flex-shrink:0">
+        <div class="act ${done?'done':''}" onclick="doTask(this,'${i}',${t.coin},${t.max})">${done?'已完成':'去完成'}</div>
+        <div class="cnt">${state.tasks[i]}/${t.max}</div>
+      </div>`;
+    el.appendChild(d);
+  });
 }
-function toggleVip(el){state.vip=!state.vip;el.classList.toggle('done',state.vip);el.textContent=state.vip?'已开通':'去开通';
-  toast(state.vip?'已开通超会，金币 ×1.5':'已关闭超会加成');refresh();}
 
-/* ---------- 浮层 ---------- */
-function openSheet(id){document.getElementById('mask').classList.add('on');document.getElementById(id).classList.add('on');}
-function closeSheet(){document.getElementById('mask').classList.remove('on');
-  document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('on'));}
-
-/* ---------- 充能浮层 ---------- */
-function openBet(id){betId=id;const a=artists.find(x=>x.id===id);
-  document.getElementById('betName').textContent=a.name;
-  document.getElementById('betEng').textContent=fmt(a.energy);
-  document.getElementById('betCoin').textContent=fmt(state.coins);
-  openSheet('betSheet');}
-function sheetBet(amount){
-  const a=artists.find(x=>x.id===betId);if(!a)return;
-  if(state.coins<amount){toast('金币不足，先去做任务');return;}
-  const before=a.energy;state.coins-=amount;state.spent+=amount;
-  a.energy+=amount;refresh();
-  document.getElementById('betEng').textContent=fmt(a.energy);
-  document.getElementById('betCoin').textContent=fmt(state.coins);
-  NODES.forEach((th,k)=>{if(before<thr&&a.energy>=thr)toast('🎉 '+a.name+' 解锁节点'+(k+1)+'！');});
-  renderArtistList();toast('为 '+a.name+' 充能 +'+fmt(amount));
+function renderLottery(){
+  const g=document.getElementById('grid9'); g.innerHTML='';
+  const order=[0,1,2,5,8,7,6,3];
+  order.forEach(k=>{
+    const p=PRIZES[k];
+    const c=document.createElement('div'); c.className='cell';
+    c.innerHTML=`<div class="ci">${p.i}</div>${p.t}`; g.appendChild(c);
+  });
+  const m=document.createElement('div'); m.className='cell mid'; m.textContent='抽奖'; g.appendChild(m);
 }
-function sheetBetCustom(){const v=parseInt(document.getElementById('betInput').value)||0;if(v>0)sheetBet(v);}
 
-/* ---------- 抽奖 ---------- */
-const PRIZES=[{i:'📸',t:'签名照'},{i:'🎫',t:'门票'},{i:'🧢',t:'周边帽'},{i:'💿',t:'专辑'},{i:'✨',t:'谢谢参与'},{i:'🎀',t:'应援扇'},{i:'🔑',t:'VIP券'},{i:'🍫',t:'零食包'},{i:'🧸',t:'玩偶'}];
-const RING=[0,1,2,4,7,6,5,3];let spinning=false;
-function renderLottery(){const g=document.getElementById('grid9');g.innerHTML='';
-  [0,1,2,3,5,6,7,8].forEach(pos=>{const p=PRIZES[pos];const d=document.createElement('div');
-    d.className='cell';d.innerHTML=`<div class="ci">${p.i}</div>${p.t}`;d._prize=p;g.appendChild(d);});
-  const m=document.createElement('div');m.className='cell mid';m.textContent='抽奖';g.appendChild(m);}
-function draw(){if(spinning)return;if(state.coins<1000){toast('金币不足 1000，先去做任务');return;}
-  state.coins-=1000;state.spent+=1000;refresh();spinning=true;
-  const cells=[...document.querySelectorAll('#grid9 .cell:not(.mid)')];
-  const target=Math.floor(Math.random()*8);const steps=RING.length*3+target;let cur=0;
-  const tm=setInterval(()=>{cells.forEach(c=>c.classList.remove('active'));cells[RING[cur%8]].classList.add('active');cur++;
-    if(cur>steps){clearInterval(tm);spinning=false;toast('🎉 抽中：'+cells[target]._prize.t);}},70);}
+// ==================== 轮播 ====================
+let slideIdx=0;
+function nextSlide(){ slideIdx=(slideIdx+1)%3; document.getElementById('slides').style.transform=`translateX(-${slideIdx}100%)`; document.querySelectorAll('#dots i').forEach((d,i)=>d.classList.toggle('on',i===slideIdx))}
+setInterval(nextSlide,3500);
 
-/* ---------- Banner 轮播 ---------- */
-let bi=0;const slides=document.getElementById('slides'),dots=document.querySelectorAll('#dots i');
-setInterval(()=>{bi=(bi+1)%3;slides.style.transform='translateX('+(-bi*100)+'%)';dots.forEach((d,i)=>d.classList.toggle('on',i===bi));},3500);
+// ==================== 交互 ====================
+function openSheet(id){ document.getElementById('mask').classList.add('on'); document.getElementById(id).classList.add('on') }
+function closeSheet(){ document.querySelectorAll('.mask,.sheet').forEach(e=>e.classList.remove('on')) }
 
-/* ---------- 初始化 ---------- */
-renderGrid(1);renderArtistList();renderLottery();refresh();
+let curBet=-1;
+function openBet(ai){
+  curBet=ai;
+  const a=ARTISTS[ai];
+  document.getElementById('betName').textContent=a.n+'《'+a.s+'》';
+  document.getElementById('betEng').textContent=a.eng.toLocaleString();
+  document.getElementById('betCoin').textContent=state.coins.toLocaleString();
+  openSheet('betSheet');
+}
+function sheetBet(v){
+  if(curBet<0)return;
+  if(state.coins<v){toast(`金币不足 ${v}，先去做任务赚金币`);return}
+  state.coins-=v; state.spent+=v;
+  ARTISTS[curBet].eng+=v; refreshHud();
+  document.getElementById('betEng').textContent=ARTISTS[curBet].eng.toLocaleString();
+  document.getElementById('betCoin').textContent=state.coins.toLocaleString();
+  renderRank();
+  checkNodes(ARTISTS[curBet]);
+}
+function sheetBetCustom(){
+  const v=parseInt(document.getElementById('betInput').value)||0; if(v>0) sheetBet(v);
+}
+function checkNodes(a){
+  NODES.forEach((n,i)=>{
+    if(a.eng>=n*1e4 && !a[`node_${i}`]){
+      a[`node_${i}`]=true;
+      const names=['语音电话','应援大礼包','现场彩蛋'];
+      if(i<names.length) toast(`🎉 解锁「${names[i]}」！`);
+      else toast(`🏆 ${a.n} 进入终极混战排名！`);
+    }
+  });
+}
+
+function doTask(el,id,coin,max){
+  if(state.tasks[id]>=max){toast('今日已达上限');return}
+  state.tasks[id]++;
+  state.coins+=coin;
+  if(state.tasks[id]>=max){el.textContent='已完成';el.classList.add('done')}
+  el.nextElementSibling.textContent=`${state.tasks[id]}/${max}`;
+  refreshHud(); toast(`+${coin} 金币`);
+}
+
+function shareArtist(name){
+  toast(`📤 推荐《${name}》已分享到好友`);
+  state.coins+=20; refreshHud();
+}
+
+// ---------- 抽奖 ----------
+let litIdx=-1, spinning=false;
+function draw(){
+  if(spinning) return;
+  if(state.coins<1000){toast('金币不足 1000，先去做任务');return}
+  state.coins-=1000; state.spent+=1000; refreshHud();
+  spinning=true;
+  const seq=[0,1,2,5,8,7,6,3];
+  const target=Math.floor(Math.random()*8);
+  const steps=seq.length*3+target; let cur=0;
+  const cells=document.querySelectorAll('#grid9 .cell:not(.mid)');
+  const timer=setInterval(()=>{
+    cells.forEach(c=>c.classList.remove('active'));
+    const ringPos=cur%8; const cellIdx=seq[ringPos];
+    cells[cellIdx].classList.add('active'); cur++;
+    if(cur>steps){ clearInterval(timer); spinning=false; toast('🎉 抽中：'+PRIZES[seq[target]].t)}
+  },70);
+}
+
+function toast(m){
+  const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show');
+  clearTimeout(t._to); t._to=setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+// ==================== 初始化 ====================
+renderArtists(); renderRank(); renderTasks(); renderLottery(); refreshHud();
+
 </script>
 </body>
 </html>
